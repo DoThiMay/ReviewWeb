@@ -59,7 +59,14 @@ public class ReviewController implements ServletContextAware {
         modelMap.addAttribute("reviews", listRew);
         return "reviewtables";
     }
-
+    
+    @RequestMapping(value = "/theloai/{theloai}", method = RequestMethod.GET)
+    public String getByTheloai(@PathVariable("theloai") String theloai, ModelMap modelMap) {
+        List<Review> listRew = rewRepo.findByTheloai(theloai);
+        modelMap.addAttribute("reviews", listRew);
+        return "theloai";
+    }
+    
     @RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
     public String getReviewById(@PathVariable("id") long id, ModelMap modelMap, Principal principal) {
         Optional<Review> optionalReview = rewRepo.findById(id); // Tìm review theo ID
@@ -68,40 +75,6 @@ public class ReviewController implements ServletContextAware {
         modelMap.addAttribute("username", principal.getName());
         return "reviewdetails"; // Tên trang JSP để hiển thị nội dung revie
     }
-
-//    @RequestMapping(value = "/viewdetails/{id}", method = RequestMethod.GET)
-//    @ResponseBody
-//    public List<CommentDTO> showDocumentDetails1(@PathVariable("id") Long id, ModelMap modelMap) {
-//        List<Comment> commentList = comRepo.findByReviewId(id);
-//        List<CommentDTO> commentDtoList = new ArrayList();
-//        List<Long> userid = new ArrayList<Long>();
-//       for (Comment commentItem : commentList) {
-//            Long id_1 = commentItem.getUserId();
-//           userid.add(id_1); 
-//        }       
-//        List<UserDto> userDto = (List<UserDto>) userRepo.findByUserID(userid);
-//        Map<Long, String> map = new HashMap<>(userDto.size());
-//        for (UserDto user : userDto) { 
-//            map.put(user.getUserId(), user.getUsername()); 
-//        } 
-//        // 1 -name1
-//        // 2-name2
-//        // 3-name3
-//        for (Comment commentItem : commentList) {
-//            CommentDTO commentDtoItem = new CommentDTO();
-//            commentDtoItem.setCommentId(commentItem.getCommentId());
-//            commentDtoItem.setContent(commentItem.getContent());
-//            commentDtoItem.setReviewId(id);
-//            commentDtoItem.setCreated_at(commentItem.getCreated_at());
-//            commentDtoItem.setUsername(map.get(commentItem.getUserId()));
-//            // lay id String id = commentItem.getId() name1, name2. name3
-//            // String name = userRepo.findbyid()
-//            commentDtoList.add(commentDtoItem);
-//        }
-//        // modelMap.addAttribute("commentDtoList", commentDtoList);
-//
-//        return commentDtoList;
-//    }
     
   @RequestMapping(value = "/viewdetails/{id}", method = RequestMethod.GET)
   @ResponseBody
@@ -119,20 +92,20 @@ public class ReviewController implements ServletContextAware {
         return ResponseEntity.ok("Data received successfully"); 
     }
     
-
+//Phải học
     @RequestMapping(value = "/filebrowse", method = RequestMethod.GET)
     public String fileBrowse(ModelMap modelMap) {
         File folder = new File(servletContext.getRealPath("/WEB-INF/uploads/"));
         modelMap.put("files", folder.listFiles());
         return "filebrowse";
     }
-
+  //Phải học
     @Override
     public void setServletContext(ServletContext servletContext) {
         this.servletContext = servletContext;
 
     }
-
+  //Phải học
     @RequestMapping(value = "/upload/image", method = RequestMethod.POST, produces = {
             MimeTypeUtils.APPLICATION_JSON_VALUE })
     @ResponseBody
@@ -145,44 +118,15 @@ public class ReviewController implements ServletContextAware {
         }
     }
 
-//
+  //Phải học
     // Method to show the review form
     @RequestMapping(value = "/dangreview", method = RequestMethod.GET)
     public String showForm(ModelMap modelMap) {
         modelMap.addAttribute("review", new Review());
         return "reviewform";
     }
-
-//
-//     Method to save review and handle file upload
-//    @RequestMapping(value = "/dangreview", method = RequestMethod.POST)
-//    public String saveReview(@ModelAttribute Review review, @RequestParam("file") MultipartFile file,
-//            RedirectAttributes redirectAttributes) {
-//        File uploadDir = new File("E:/Review/uploads");
-//        if (!uploadDir.exists()) {
-//            uploadDir.mkdirs();  // Creates the directory and any necessary parent directories
-//        }
-//
-//        if (!file.isEmpty()) {
-//            String fileName = file.getOriginalFilename();
-//            File saveFile = new File(uploadDir, fileName);
-//            try {
-//                file.transferTo(saveFile);
-//                review.setAnh(fileName);  // Save file name to the review object
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//                redirectAttributes.addFlashAttribute("msg", "File upload failed!");
-//                return "redirect:/dangreview";
-//            }
-//        }
-//
-//        // Save review to the database
-//        rewRepo.save(review);
-//        redirectAttributes.addFlashAttribute("msg", "Review saved successfully!");
-//        return "redirect:/review";
-//    }
-//
-    @RequestMapping(value = "/dangreview", method = RequestMethod.POST)
+  //Phải học
+  @RequestMapping(value = "/dangreview", method = RequestMethod.POST)
     public String saveReview(@ModelAttribute Review review, @RequestParam("file") MultipartFile file,
             RedirectAttributes redirectAttributes) {
         File uploadDir = new File(UPLOAD_DIRECTORY);
@@ -210,37 +154,4 @@ public class ReviewController implements ServletContextAware {
         redirectAttributes.addFlashAttribute("msg", "Review saved successfully!");
         return "redirect:/";
     }
-//
-////    @RequestMapping(value = "/upload/image", method = RequestMethod.POST)
-////    @ResponseBody
-////    public String handleImageUpload(@RequestParam("upload") MultipartFile file) {
-////        String fileName = file.getOriginalFilename();
-////        File saveFile = new File(UPLOAD_DIRECTORY + fileName);
-////
-////        try {
-////            file.transferTo(saveFile);
-////            String imageUrl = "/images/" + fileName;
-////            return "{\"url\":\"" + imageUrl + "\"}";
-////        } catch (IOException e) {
-////            e.printStackTrace();
-////            return "{\"error\":\"File upload failed\"}";
-////        }
-////    }
-//    // Endpoint for CKEditor image upload
-//    @RequestMapping(value = "/upload/image", method = RequestMethod.POST)
-//    @ResponseBody
-//    public String handleImageUpload(@RequestParam("upload") MultipartFile file) {
-//        String fileName = file.getOriginalFilename();
-//        File saveFile = new File(UPLOAD_DIRECTORY + fileName);
-//
-//        try {
-//            file.transferTo(saveFile);
-//            String imageUrl = "/images/" + fileName; // Ensure this URL matches your image serving path
-//            return "{\"url\":\"" + imageUrl + "\"}";
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            return "{\"error\":\"File upload failed\"}";
-//        }
-//    }
-
 }
