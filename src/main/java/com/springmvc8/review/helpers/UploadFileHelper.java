@@ -11,6 +11,7 @@ import javax.servlet.ServletContext;
 import org.springframework.web.multipart.MultipartFile;
 
 public class UploadFileHelper {
+  //Phải học
     public static String upload(ServletContext servletContext, MultipartFile multipartFile) {
         try {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");

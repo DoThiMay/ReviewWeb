@@ -152,6 +152,6 @@ public class ReviewController implements ServletContextAware {
         // Save review to the database
         rewRepo.save(review);
         redirectAttributes.addFlashAttribute("msg", "Review saved successfully!");
-        return "redirect:/";
+        return "redirect:/quanlybaiviet";
     }
 }

@@ -46,7 +46,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
         http.headers().frameOptions().sameOrigin()
             .and()
             .authorizeRequests()
-                .antMatchers("/view", "/search", "/lienhe").permitAll()
+                .antMatchers("/view", "/dangky", "/search", "/lienhe").permitAll()
                 .antMatchers("/review/dangreview", "/hello", "trang-chu", "/manageDocument").hasAnyAuthority("ADMIN")
                 .anyRequest().authenticated()
             .and()

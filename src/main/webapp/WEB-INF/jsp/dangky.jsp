@@ -7,11 +7,6 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Đăng Ký</title>
-<style>
-.error {
-	color: red;
-}
-</style>
 <link rel="stylesheet" href="/css/bootstrap.min.css">
 <script type="text/javascript" src="/js/bootstrap.min.js"></script>
 <style>
@@ -19,7 +14,7 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	height: 110vh;
+	height: 100vh;
 	font-family: 'Times New Roman', Times, serif;
 	background-color: #B0D4B8;
 	margin: 0;
@@ -33,16 +28,17 @@ body {
 	border: 1px solid white;
 	border-radius: 30px;
 	background-color: white;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .logo {
-	width: 200px;
-	height: 200px;
-	margin-bottom: 10px;
-	border-radius: 100%;
+	width: 120px;
+	height: 120px;
+	margin-bottom: 15px;
+	border-radius: 50%;
 }
 
-h1 {
+h2 {
 	font-size: 28px;
 	color: #333;
 	margin-bottom: 20px;
@@ -56,24 +52,34 @@ h1 {
 .form-group label {
 	display: block;
 	margin-bottom: 5px;
-	font-size: 18px;
+	font-size: 16px;
 	color: black;
 }
 
 .form-group input {
-	width: 95%;
+	width: 100%;
 	padding: 10px;
-	font-size: 16px;
+	font-size: 14px;
 	border: 1px solid #ddd;
 	border-radius: 20px;
 	outline: none;
-	background-color: #B0D4B8;
+	background-color: #f5f5f5;
+}
+
+.form-group input:focus {
+	border-color: #7BB7A4;
+	box-shadow: 0 0 5px rgba(123, 183, 164, 0.5);
+}
+
+.error {
+	color: red;
+	font-size: 12px;
 }
 
 .register {
 	text-align: right;
 	margin-top: 10px;
-	font-size: 16px;
+	font-size: 14px;
 }
 
 .register a {
@@ -86,17 +92,24 @@ h1 {
 	text-decoration: underline;
 }
 
+.btn-login-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 20px;
+}
+
 .btn-login {
-	width: 40%;
-	padding: 8px;
-	font-size: 18px;
+	width: 60%;
+	padding: 10px;
+	font-size: 16px;
 	color: #fff;
 	background-color: #4CAF50;
 	border: none;
 	cursor: pointer;
-	margin-top: 30px;
 	border: 1px solid #45a049;
 	border-radius: 20px;
+	transition: background-color 0.3s ease-in-out;
 }
 
 .btn-login:hover {
@@ -134,7 +147,7 @@ h1 {
 			</div>
 			<p class="error">${error}</p>
 
-			<div class="container">
+			<div class="btn-login-container">
 				<input type="submit" class="btn-login" value="Đăng Ký" />
 			</div>
 		</form:form>

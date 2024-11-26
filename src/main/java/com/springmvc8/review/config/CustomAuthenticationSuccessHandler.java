@@ -16,9 +16,9 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
             Authentication authentication) throws IOException, ServletException {
         if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("ADMIN"))) {
-            response.sendRedirect("/dangreview");
+            response.sendRedirect("/helloAd");
         } else {
-            response.sendRedirect("/");
+            response.sendRedirect("/trangchu");
         }
         
     }

@@ -116,6 +116,6 @@
 			});
 		}
 	</script>
-	<a href="${pageContext.request.contextPath}/">Quay lại danh sách</a>
+	<a href="${pageContext.request.contextPath}/trangchu">Quay lại danh sách</a>
 </body>
 </html>
