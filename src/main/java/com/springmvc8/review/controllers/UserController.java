@@ -1,6 +1,7 @@
 package com.springmvc8.review.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -27,13 +28,14 @@ public class UserController {
     RoleRespository roleRepo;
     @Autowired
     User_RoleRespository user_roleRe;
+
     @RequestMapping(value = "/showUser", method = RequestMethod.GET)
     public String showUser(ModelMap modelMap) {
         List<User> listUser = userRepo.findAll();
         modelMap.addAttribute("user", listUser);
         return "User";
     }
-    
+
     @RequestMapping(value = "/dangky", method = RequestMethod.GET)
     public String insertUser(ModelMap modelMap) {
         modelMap.addAttribute("user", new User());
@@ -47,19 +49,26 @@ public class UserController {
             return "dangky";
         }
         try {
-            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-            String encodedPassword = passwordEncoder.encode(user.getPassword());
-            user.setPassword(encodedPassword);
-            userRepo.save(user);
-            Role userRole = roleRepo.findByName("USER");
-            User_Role user_role = new User_Role (user.getUserId(), userRole.getRoleId());
-            user_roleRe.save(user_role);
-            userRepo.save(user);
-            return "redirect:/showUser";
+            Optional<User> exisUser = userRepo.getByUsername(user.getUsername());
+            if (exisUser.isPresent()) {
+                modelMap.addAttribute("error", "Username đã tồn tại!");
+                return "dangky";
+            } else {
+                BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+                String encodedPassword = passwordEncoder.encode(user.getPassword());
+                user.setPassword(encodedPassword);
+                userRepo.save(user);
+                Role userRole = roleRepo.findByName("USER");
+                User_Role user_role = new User_Role(user.getUserId(), userRole.getRoleId());
+                user_roleRe.save(user_role);
+                userRepo.save(user);
+                return "redirect:/showUser";
+            }
+
         } catch (Exception e) {
             modelMap.addAttribute("error", e.toString());
             return "dangky";
         }
     }
-    
+
 }

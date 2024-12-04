@@ -277,12 +277,15 @@ footer {
 }
 </style>
 </head>
-    <body>
-        <header class="header">
-            <div class="logo"> <img src="https://scontent.fhan2-5.fna.fbcdn.net/v/t1.15752-9/462546907_1037871208022632_2005635478269107597_n.png?_nc_cat=104&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeEw0LpXMiVy63vCMqLLX26I42MY98Ysde3jYxj3xix17SB-5O8Uc9VgAhBwcX35Ya4KKYloMHgTxmDD13E10ZzA&_nc_ohc=eEwvkwhgP5gQ7kNvgE8AjAC&_nc_zt=23&_nc_ht=scontent.fhan2-5.fna&_nc_gid=AnMwVi5gXh_NXlbnqBjt1r3&oh=03_Q7cD1QFBw1SKn3dkjeAPlMFftNNrE5_mY6wu2nPZb86gzDV4kQ&oe=674AF43A"> </div>
-        </header>
-        <!-- Thanh điều hướng -->
-       <div class="navbar">
+<body>
+	<header class="header">
+		<div class="logo">
+			<img
+				src="https://scontent.fhan2-5.fna.fbcdn.net/v/t1.15752-9/462546907_1037871208022632_2005635478269107597_n.png?_nc_cat=104&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeEw0LpXMiVy63vCMqLLX26I42MY98Ysde3jYxj3xix17SB-5O8Uc9VgAhBwcX35Ya4KKYloMHgTxmDD13E10ZzA&_nc_ohc=eEwvkwhgP5gQ7kNvgE8AjAC&_nc_zt=23&_nc_ht=scontent.fhan2-5.fna&_nc_gid=AnMwVi5gXh_NXlbnqBjt1r3&oh=03_Q7cD1QFBw1SKn3dkjeAPlMFftNNrE5_mY6wu2nPZb86gzDV4kQ&oe=674AF43A">
+		</div>
+	</header>
+	<!-- Thanh điều hướng -->
+	<div class="navbar">
 		<!-- Menu bên trái -->
 		<div class="nav-left">
 			<a href="/trangchu" style="color: #d6881b;"> Trang Chủ </a>
@@ -306,108 +309,125 @@ footer {
 		<!-- Menu bên phải -->
 		<div class="nav-right">
 			<c:choose>
-							<c:when test="${empty myDbValues}">
-								<<a href="/dangnhap">Đăng nhập</a>
-								<a href="/trang-chu/dangky">Đăng ký</a>
-							</c:when>
-							<c:otherwise>
-								<a>${myDbValues}</a>
-								<a href="/logout">Đăng xuất</a>
-							</c:otherwise>
-						</c:choose>
+				<c:when test="${empty myDbValues}">
+					<a href="/dangnhap">Đăng nhập</a>
+					<a href="/trang-chu/dangky">Đăng ký</a>
+				</c:when>
+				<c:otherwise>
+					<a>${myDbValues}</a>
+					<a href="/logout">Đăng xuất</a>
+				</c:otherwise>
+			</c:choose>
 		</div>
 	</div>
 
-        <!-- Thân trang -->
+	<!-- Thân trang -->
+<body>
+	<div class="container">
+		<!-- Phần trên -->
+		<div class="top-row">
+			<div class="top-column">
+				<img
+					src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1495635816i/32521178.jpg"
+					alt="Book Image">
+			</div>
+			<div class="top-column"></div>
+			<div class="top-column"></div>
+		</div>
 
-      <body>
-    <div class="container">
-        <!-- Phần trên -->
-        <div class="top-row">
-            <div class="top-column">
-                <img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1495635816i/32521178.jpg" alt="Book Image">
-            </div>
-            <div class="top-column"></div>
-            <div class="top-column"></div>
-        </div>
+		<!-- Phần dưới -->
+		<div class="bottom-row">
+			<!-- Left half for reviews -->
+			<div class="left-half">
+				<div class="left-column">
+					<div class="left-column-title">
+						<b> Review Sách </b>
+					</div>
+					<div class="left-row">
+						<c:forEach var="review" items="${reviews}">
+							<div class="left-cell">
+								<div class="cell-image">
+									<c:choose>
+										<c:when test="${not empty review.anh}">
+											<img
+												src="${pageContext.request.contextPath}/images/${review.anh}"
+												alt="${review.tieude}">
+										</c:when>
+										<c:otherwise>
+											<img src="/path/to/default-image.jpg" alt="No Image">
+										</c:otherwise>
+									</c:choose>
+								</div>
+								<div class="cell-content">
+									<a href="${pageContext.request.contextPath}/view/${review.id}">${review.tieude}</a>
+								</div>
+							</div>
+						</c:forEach>
+					</div>
+				</div>
 
-        <!-- Phần dưới -->
-        <div class="bottom-row">
-            <!-- Left half for reviews -->
-            <div class="left-half">
-                <div class="left-column">
-                    <div class="left-column-title"><b> Review Sách </b></div>
-                    <div class="left-row">
-                        <c:forEach var="review" items="${reviews}">
-                            <div class="left-cell">
-                                <div class="cell-image">
-                                    <c:choose>
-                                        <c:when test="${not empty review.anh}">
-                                            <img src="${pageContext.request.contextPath}/images/${review.anh}" alt="${review.tieude}">
-                                        </c:when>
-                                        <c:otherwise>
-                                            <img src="/path/to/default-image.jpg" alt="No Image">
-                                        </c:otherwise>
-                                    </c:choose>
-                                </div>
-                                <div class="cell-content">
-                                    <a href="${pageContext.request.contextPath}/view/${review.id}">${review.tieude}</a>
-                                </div>
-                            </div>
-                        </c:forEach>
-                    </div>
-                </div>
+				<div class="left-column">
+					<div class="left-column-title">
+						<b> Review Truyện </b>
+					</div>
+					<div class="left-row">
+						<c:forEach var="review" items="${reviews}">
+							<div class="left-cell">
+								<div class="cell-image">
+									<c:choose>
+										<c:when test="${not empty review.anh}">
+											<img
+												src="${pageContext.request.contextPath}/images/${review.anh}"
+												alt="${review.tieude}">
+										</c:when>
+										<c:otherwise>
+											<img src="/path/to/default-image.jpg" alt="No Image">
+										</c:otherwise>
+									</c:choose>
+								</div>
+								<div class="cell-content">
+									<a href="${pageContext.request.contextPath}/view/${review.id}">${review.tieude}</a>
+								</div>
+							</div>
+						</c:forEach>
+					</div>
+				</div>
+			</div>
 
-                <div class="left-column">
-                    <div class="left-column-title"><b> Review Truyện </b></div>
-                    <div class="left-row">
-                        <c:forEach var="review" items="${reviews}">
-                            <div class="left-cell">
-                                <div class="cell-image">
-                                    <c:choose>
-                                        <c:when test="${not empty review.anh}">
-                                            <img src="${pageContext.request.contextPath}/images/${review.anh}" alt="${review.tieude}">
-                                        </c:when>
-                                        <c:otherwise>
-                                            <img src="/path/to/default-image.jpg" alt="No Image">
-                                        </c:otherwise>
-                                    </c:choose>
-                                </div>
-                                <div class="cell-content">
-                                    <a href="${pageContext.request.contextPath}/view/${review.id}">${review.tieude}</a>
-                                </div>
-                            </div>
-                        </c:forEach>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Right half for latest reviews -->
-            <div class="right-half">
-                <div class="right-column-title"><b> Review mới nhất </b></div>
-                <div class="review-item">
-                    <div class="review-image">
-                        <img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1495635816i/32521178.jpg" alt="Newest Review">
-                    </div>
-                    <div class="review-content">
-                        <div class="review-title">
-                            <a href="#"> Tiêu đề review mới nhất </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+			<!-- Right half for latest reviews -->
+			<div class="right-half">
+				<div class="right-column-title">
+					<b> Review mới nhất </b>
+				</div>
+				<div class="review-item">
+					<div class="review-image">
+						<img
+							src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1495635816i/32521178.jpg"
+							alt="Newest Review">
+					</div>
+					<div class="review-content">
+						<div class="review-title">
+							<a href="#"> Tiêu đề review mới nhất </a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 
-        <!-- Footer section -->
-        <footer>
-            <div class="footer-left"> Bản quyền thuộc Góc nhỏ.vn </div>
-            <div class="footer-right">
-                    <p><a href="#about"><b> Giới thiệu </b></a></p>
-                    <p> | </p>
-                    <p><a href="tel:+123456789"><b> Hotline: 0999999999 </b></a></p>
-            </div>
-        </footer>
-    </body>
+<!-- Footer section -->
+<footer>
+	<div class="footer-left">Bản quyền thuộc Góc nhỏ.vn</div>
+	<div class="footer-right">
+		<p>
+			<a href="#about"><b> Giới thiệu </b></a>
+		</p>
+		<p>|</p>
+		<p>
+			<a href="tel:+123456789"><b> Hotline: 0999999999 </b></a>
+		</p>
+	</div>
+</footer>
+</body>
 </html>

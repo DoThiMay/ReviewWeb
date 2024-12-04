@@ -111,16 +111,21 @@
 
 <body>
     <div class="login-container">
-        <img src="https://scontent.fhan15-2.fna.fbcdn.net/v/t1.15752-9/462546907_1037871208022632_2005635478269107597_n.png?_nc_cat=104&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeHoo6tHeWqn-Mn0Jxj49sIq42MY98Ysde3jYxj3xix17XYL2AkanDFbkdMB1c4wRvh82FNp3xQm4mA_E3MALcnc&_nc_ohc=eEwvkwhgP5gQ7kNvgGdZU6q&_nc_zt=23&_nc_ht=scontent.fhan15-2.fna&_nc_gid=AB3yCmuFo12WXdjeymslXQZ&oh=03_Q7cD1QEeV32dSZVVmAPTKhUpRYwCdwg8GYCZvpl0u4j_7cAofQ&oe=674AF43A"
-            alt="Cỏ bốn lá" class="logo">
+     <img
+    src="/image/logo.png"
+    alt="Custom Logo"
+    class="logo"
+/>
+
         <h1>Đăng Nhập</h1>
         <form:form method="POST" action="/j_spring_security_check" modelAttribute="user">
-            <div class="form-group">
-                <label for="username">Tên Người Dùng:</label>
-                <form:input type="text" class="form-control" placeholder="Nhập tên người dùng" path="username" />
-                <form:errors path="username" cssClass="error" />
-            </div>
-            <div class="form-group">
+			<div class="form-group">
+				<label for="username">Tên Người Dùng:</label>
+				<form:input type="text" class="form-control"
+					placeholder="Nhập tên người dùng" path="username" />
+				<form:errors path="username" cssClass="error" />
+			</div>
+			<div class="form-group">
                 <label for="password">Mật khẩu:</label>
                 <form:input type="password" class="form-control" placeholder="Nhập mật khẩu" path="password" />
                 <form:errors path="password" cssClass="error" />

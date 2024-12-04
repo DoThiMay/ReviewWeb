@@ -16,5 +16,7 @@ public interface UserRespository extends JpaRepository <User, Long>{
     @Query(value = "SELECT userId, username FROM User u WHERE u.userId IN ?1", nativeQuery = true)
     public UserDto findByUserID(List<Long> userId);
     Optional<UserDto> findByUsername(String username);
+    @Query(value="SELECT * FROM user  WHERE username = ?1", nativeQuery = true)
+    Optional<User> getByUsername(String username);
 
 }
